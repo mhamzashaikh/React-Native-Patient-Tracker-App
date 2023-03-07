@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
-const Item = ({ itemData}) => {
+const Item = ({ itemData, navigation}) => {
 
   const unixTimestamp = itemData.dateOfArrival;
   const dateObject = new Date(unixTimestamp);
@@ -16,6 +16,9 @@ const Item = ({ itemData}) => {
         <Text style={styles.date}>{humanReadableDate}</Text>
         <Text style={styles.cost}>${itemData.cost}</Text>
       </View>
+      <TouchableOpacity onPress={()=>navigation.navigate("PatientDetails", itemData)}>
+        <Image source={require('../assets/view.png')} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -26,6 +29,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: 'space-around',
     paddingTop: 8,
     paddingBottom: 5,
     paddingLeft: 5,

@@ -1,15 +1,66 @@
-import { StyleSheet, Text, View, Image, TextInput } from "react-native";
-import React, { useContext } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TextInput,
+  Pressable,
+} from "react-native";
+import React, { useContext, useState, useEffect } from "react";
 import Background from "./Background";
 import { useWindowDimensions } from "react-native";
 import ViewPatient from "./ViewPatient";
 import AuthContext from "../AuthContext";
+import {
+  ref,
+  onValue,
+  query,
+  child,
+  orderByChild,
+  equalTo,
+} from "firebase/database";
+import { database } from "../firebaseConfig";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   const { height, width } = useWindowDimensions();
+  const [searchText, setSearchText] = useState("");
+  const [patientData, setPatientData] = useState();
   const Auth = useContext(AuthContext);
+  const authContext = useContext(AuthContext);
+  console.log("AuthContext: >>>>>> : ", authContext);
+
+  console.log("Searchtext: ", searchText);
+  useEffect(() => {
+    // Get a reference to the 'data' node in the database
+    const dataRef = ref(database, "patients");
+
+    // Create a query that filters the data based on the doctorID field
+    const doctorIDQuery = query(
+      dataRef,
+      orderByChild("doctorID"),
+      equalTo(authContext.user)
+    );
+
+    onValue(
+      doctorIDQuery,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data !== null) {
+          const patientArray = Object.keys(data).map((key) => ({
+            patientuid: key,
+            ...data[key],
+          }));
+          setPatientData(patientArray);
+        } else {
+          console.log("No Data to show");
+        }
+      },
+      []
+    );
+  }, []);
 
   console.log("useContext: ", Auth);
+
   return (
     <Background>
       {/* <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 25 }}>
@@ -53,19 +104,26 @@ const Home = () => {
               Right Now
             </Text>
           </View>
-          <View style={{ padding: 10, width: "90%" }}>
+          <Pressable
+            style={{ padding: 10, width: "90%" }}
+            onPress={() => navigation.navigate("Profile")}
+          >
             <Image
               source={require("../assets/doctorimg.png")}
               style={styles.topImage}
             />
-          </View>
+          </Pressable>
         </View>
         <View style={styles.searchSection}>
           <Image
             style={styles.searchIcon}
             source={require("../assets/search-bar.png")}
           />
-          <TextInput style={styles.input} placeholder="Search" />
+          <TextInput
+            style={styles.input}
+            placeholder="Search"
+            onChangeText={(value) => setSearchText(value)}
+          />
         </View>
         <View
           style={{
@@ -77,7 +135,11 @@ const Home = () => {
             alignItems: "center",
           }}
         >
-          <ViewPatient />
+          <ViewPatient
+            navigation={navigation}
+            searchText={searchText}
+            patientData={patientData}
+          />
         </View>
       </View>
     </Background>

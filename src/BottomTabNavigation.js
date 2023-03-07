@@ -64,8 +64,8 @@ const BottomTabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="ViewPatient"
-        component={Profile }
+        name="Profile"
+        component={Profile}
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ focused, color, size }) => (

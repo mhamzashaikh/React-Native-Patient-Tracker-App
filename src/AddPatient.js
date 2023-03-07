@@ -2,9 +2,11 @@ import {
   StyleSheet,
   Text,
   View,
+  ScrollView,
   Image,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
 } from "react-native";
 import React, { useState, useContext } from "react";
 import RNPickerSelect from "react-native-picker-select";
@@ -58,50 +60,77 @@ const AddPatient = () => {
         />
         <Text style={styles.topText}>Add Patient</Text>
       </View>
-      <View style={styles.subContainer}>
-        <Text style={styles.headingText}>Add your Patient Info</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Patient Name"
-          onChangeText={(text) =>
-            setFormData({ ...formData, patientName: text })
-          }
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Patient Phone Number"
-          onChangeText={(text) =>
-            setFormData({ ...formData, patientPhoneNumber: text })
-          }
-        />
-        <View style={styles.input}>
-          <RNPickerSelect
-           useNativeAndroidPickerStyle={false} 
-            onValueChange={(value) =>
-              setFormData({ ...formData, patientDisease: value })
-            }
-            items={pickerItems}
-            placeholder={{ label: "Select an option", value: "" }}
-            value={formData.patientDisease}
-          />
-        </View>
-        <TextInput
-          style={styles.input}
-          placeholder="Cost"
-          onChangeText={(text) => setFormData({ ...formData, cost: text })}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Prescription"
-          onChangeText={(text) =>
-            setFormData({ ...formData, prescription: text })
-          }
-        />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.scrollContainer}
+      >
+        <KeyboardAvoidingView behavior="position">
+          <Text style={styles.headingText}>Add your Patient Info</Text>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Patient Name"
+              onChangeText={(text) =>
+                setFormData({ ...formData, patientName: text })
+              }
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Patient Phone Number"
+              onChangeText={(text) =>
+                setFormData({ ...formData, patientPhoneNumber: text })
+              }
+            />
+          </View>
+          <View style={styles.input}>
+            <RNPickerSelect
+              useNativeAndroidPickerStyle={false}
+              onValueChange={(value) =>
+                setFormData({ ...formData, patientDisease: value })
+              }
+              items={pickerItems}
+              placeholder={{ label: "Select an option", value: "" }}
+              value={formData.patientDisease}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Cost"
+              onChangeText={(text) => setFormData({ ...formData, cost: text })}
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Prescription"
+              onChangeText={(text) =>
+                setFormData({ ...formData, prescription: text })
+              }
+            />
+          </View>
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Prescription"
+              onChangeText={(text) =>
+                setFormData({ ...formData, prescription: text })
+              }
+            />
+          </View>
 
-        <TouchableOpacity style={styles.button} onPress={() => myFirebase()}>
-          <Text style={styles.buttonText}>Add</Text>
-        </TouchableOpacity>
-      </View>
+          <View style={{ alignItems: "center" }}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => myFirebase()}
+            >
+              <Text style={styles.buttonText}>Add</Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </ScrollView>
     </View>
   );
 };
@@ -112,19 +141,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
 
-    justifyContent: "space-between",
+    // justifyContent: "center",
     alignItems: "center",
   },
   headerContainer: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
   },
-  subContainer: {
-    flex: 3,
-    justifyContent: "center",
-    alignItems: "center",
-    width: "95%",
+  scrollContainer: {
+    height: "50%",
+    width: "80%",
   },
   topText: {
     position: "absolute",

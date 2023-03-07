@@ -1,4 +1,11 @@
-import { StyleSheet, Text, View, FlatList, Modal, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 import React, { useEffect, useContext, useState } from "react";
 import Item from "./Item";
 import Category from "./Category";
@@ -118,38 +125,57 @@ const CATEGORYDATA = [
   },
 ];
 
-const ViewPatient = () => {
-  const [patientData, setPatientData] = useState();
+const ViewPatient = ({ navigation, searchText, patientData }) => {
+  // const [patientData, setPatientData] = useState();
   const [diseaseFilter, setDiseaseFilter] = useState("All");
   const [filteredData, setFilteredData] = useState();
   const authContext = useContext(AuthContext);
   console.log("filter data: ", filteredData);
+  console.log("Prop Search text: ", searchText);
 
   useEffect(() => {
-    // Get a reference to the 'data' node in the database
-    const dataRef = ref(database, "patients");
+    // // Get a reference to the 'data' node in the database
+    // const dataRef = ref(database, "patients");
 
-    // Create a query that filters the data based on the doctorID field
-    const doctorIDQuery = query(
-      dataRef,
-      orderByChild("doctorID"),
-      equalTo(authContext.user)
-    );
+    // // Create a query that filters the data based on the doctorID field
+    // const doctorIDQuery = query(
+    //   dataRef,
+    //   orderByChild("doctorID"),
+    //   equalTo(authContext.user)
+    // );
 
-    onValue(doctorIDQuery, (snapshot) => {
-      const data = snapshot.val();
-      if (data !== null) {
-        const patientArray = Object.keys(data).map((key) => ({
-          patientuid: key,
-          ...data[key],
-        }));
-        setPatientData(patientArray);
-        setFilteredData(patientArray);
-      } else {
-        console.log("No Data to show");
-      }
-    });
-  }, []);
+    // onValue(doctorIDQuery, (snapshot) => {
+    //   const data = snapshot.val();
+    //   if (data !== null) {
+    //     const patientArray = Object.keys(data).map((key) => ({
+    //       patientuid: key,
+    //       ...data[key],
+    //     }));
+    //     setPatientData(patientArray);
+    //     setFilteredData(patientArray);
+    //   } else {
+    //     console.log("No Data to show");
+    //   }
+    // },[]);
+    if (searchText) {
+      const filtered = patientData.filter((item) =>
+        item.patientName.toLowerCase().includes(searchText.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(patientData);
+    }
+  }, [patientData, searchText]);
+
+  // if (searchText.length > 0) {
+  //   const filtered = patientData.filter((item) =>
+  //     item.patientName.toLowerCase().includes(searchText.toLowerCase())
+  //   );
+  //   console.log("Filtered: ", filtered.length);
+  //   if (filtered.length != 0) {
+  //     setFilteredData(filtered);
+  //   }
+  // }
 
   const handleDiseaseSelect = (disease) => {
     console.log("disease: ", disease);
@@ -162,8 +188,6 @@ const ViewPatient = () => {
       );
     }
   };
-
- 
 
   return (
     <View style={styles.container}>
@@ -182,10 +206,9 @@ const ViewPatient = () => {
         nestedScrollEnabled={true}
         data={filteredData}
         renderItem={({ item }) => (
-          <Item itemData={item} />
+          <Item itemData={item} navigation={navigation} />
         )}
       />
-    
     </View>
   );
 };

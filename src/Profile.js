@@ -10,8 +10,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../firebaseConfig";
 import AuthContext from "../AuthContext";
+import { getAuth, signOut } from "firebase/auth";
 
-const Profile = () => {
+const Profile = ({ navigation }) => {
   const [profileData, setProfileData] = useState();
   const authContext = useContext(AuthContext);
 
@@ -24,6 +25,18 @@ const Profile = () => {
   }, []);
 
   console.log("Profile: ", profileData);
+
+  const signOutUser = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        authContext.signout();
+        navigation.replace("Login");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <View style={styles.container}>
@@ -58,6 +71,9 @@ const Profile = () => {
         />
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Update</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={signOutUser}>
+          <Text style={styles.buttonText}>Signout</Text>
         </TouchableOpacity>
       </View>
       {/* <Image
