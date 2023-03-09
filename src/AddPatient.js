@@ -86,10 +86,9 @@ const AddPatient = () => {
           </View>
           <View style={styles.input}>
             <RNPickerSelect
-              useNativeAndroidPickerStyle={false}
-              onValueChange={(value) =>
-                setFormData({ ...formData, patientDisease: value })
-              }
+              onValueChange={(value) => {
+                setFormData({ ...formData, patientDisease: value });
+              }}
               items={pickerItems}
               placeholder={{ label: "Select an option", value: "" }}
               value={formData.patientDisease}
@@ -100,15 +99,6 @@ const AddPatient = () => {
               style={styles.input}
               placeholder="Cost"
               onChangeText={(text) => setFormData({ ...formData, cost: text })}
-            />
-          </View>
-          <View>
-            <TextInput
-              style={styles.input}
-              placeholder="Prescription"
-              onChangeText={(text) =>
-                setFormData({ ...formData, prescription: text })
-              }
             />
           </View>
           <View>
@@ -150,7 +140,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   scrollContainer: {
-    height: "50%",
+    height: "40%",
     width: "80%",
   },
   topText: {
@@ -181,6 +171,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgb(220,220,220)",
     padding: 10,
     borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
   },
   button: {
     marginTop: 10,
