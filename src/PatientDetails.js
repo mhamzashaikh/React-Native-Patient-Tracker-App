@@ -17,6 +17,7 @@ const PatientDetails = ({ route }) => {
     doctorID,
     patientDisease,
     patientName,
+    appointmentDate,
     patientPhoneNumber,
     patientuid,
     prescription,
@@ -43,6 +44,15 @@ const PatientDetails = ({ route }) => {
             style={styles.input}
             placeholder="Patient Name"
             value={patientName}
+            editable={false}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Appointment Date:</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Appointment Date"
+            value={appointmentDate}
             editable={false}
           />
         </View>

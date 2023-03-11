@@ -125,7 +125,7 @@ const CATEGORYDATA = [
   },
 ];
 
-const ViewPatient = ({ navigation, searchText, patientData }) => {
+const ViewPatient = ({ navigation, searchText, patientData, selectedDate }) => {
   // const [patientData, setPatientData] = useState();
   const [diseaseFilter, setDiseaseFilter] = useState("All");
   const [filteredData, setFilteredData] = useState();
@@ -162,10 +162,23 @@ const ViewPatient = ({ navigation, searchText, patientData }) => {
         item.patientName.toLowerCase().includes(searchText.toLowerCase())
       );
       setFilteredData(filtered);
+    } else if (selectedDate) {
+      console.log(
+        "DATE clicked... ",
+        selectedDate.toLocaleString().split(",")[0]
+      );
+      const filtered = patientData.filter(
+        (item) => item.appointmentDate == selectedDate.toLocaleDateString()
+      );
+      if (filtered.length != 0) {
+        setFilteredData(filtered);
+      } else {
+        setFilteredData(patientData);
+      }
     } else {
       setFilteredData(patientData);
     }
-  }, [patientData, searchText]);
+  }, [patientData, searchText, selectedDate]);
 
   // if (searchText.length > 0) {
   //   const filtered = patientData.filter((item) =>

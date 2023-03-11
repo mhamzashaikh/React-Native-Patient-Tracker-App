@@ -13,11 +13,15 @@ import RNPickerSelect from "react-native-picker-select";
 import AuthContext from "../AuthContext";
 import { database } from "../firebaseConfig";
 import { ref, push, child, update, serverTimestamp } from "firebase/database";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const AddPatient = () => {
   const authContext = useContext(AuthContext);
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
   const [formData, setFormData] = useState({
     patientName: "",
+    appointmentDate: "",
     patientPhoneNumber: "",
     patientDisease: "",
     cost: "",
@@ -25,6 +29,8 @@ const AddPatient = () => {
     dateOfArrival: serverTimestamp(),
     doctorID: authContext.user,
   });
+
+  console.log("Date:::::: <<< >>> : ", formData);
 
   const pickerItems = [
     { label: "Covid19", value: "Covid19" },
@@ -51,6 +57,16 @@ const AddPatient = () => {
   };
   // ---------
 
+  const handleDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+    setFormData({
+      ...formData,
+      appointmentDate: currentDate.toLocaleDateString(),
+    });
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -74,6 +90,12 @@ const AddPatient = () => {
                 setFormData({ ...formData, patientName: text })
               }
             />
+          </View>
+          <View>
+            <View style={styles.datePicker}>
+              <Text style={{ opacity: 0.3 }}>Appointment Date: </Text>
+              <DateTimePicker value={date} onChange={handleDateChange} />
+            </View>
           </View>
           <View>
             <TextInput
@@ -173,6 +195,17 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
+  },
+  datePicker: {
+    width: "90%",
+    height: 40,
+    margin: 12,
+    backgroundColor: "rgb(220,220,220)",
+    padding: 10,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   button: {
     marginTop: 10,

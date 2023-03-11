@@ -5,6 +5,7 @@ import {
   Image,
   TextInput,
   Pressable,
+  Platform,
 } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
 import Background from "./Background";
@@ -20,14 +21,21 @@ import {
   equalTo,
 } from "firebase/database";
 import { database } from "../firebaseConfig";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const Home = ({ navigation }) => {
-  const { height, width } = useWindowDimensions();
   const [searchText, setSearchText] = useState("");
   const [patientData, setPatientData] = useState();
+  const [date, setDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState();
+  const [show, setShow] = useState(false);
+  const { height, width } = useWindowDimensions();
   const Auth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
   console.log("AuthContext: >>>>>> : ", authContext);
+
+  // console.log("DATEEEE: ", date.toLocaleString().split(",")[0]);
+  console.log("DATEEEE: ", selectedDate);
 
   console.log("Searchtext: ", searchText);
   useEffect(() => {
@@ -60,6 +68,18 @@ const Home = ({ navigation }) => {
   }, []);
 
   console.log("useContext: ", Auth);
+
+  const handleDateChange = (event, selectedDate) => {
+    console.log("Selected Date: ", selectedDate);
+    // const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(selectedDate);
+    setSelectedDate(selectedDate);
+  };
+
+  const showDatePicker = () => {
+    setShow(true);
+  };
 
   return (
     <Background>
@@ -124,6 +144,27 @@ const Home = ({ navigation }) => {
             placeholder="Search"
             onChangeText={(value) => setSearchText(value)}
           />
+
+          <View>
+            <Image
+              style={styles.dateIcon}
+              source={require("../assets/date.png")}
+            />
+            <View
+              style={{
+                opacity: 0,
+                position: "absolute",
+                right: 10,
+                top: -5,
+              }}
+            >
+              <DateTimePicker
+                style={{ height: 50, width: 50 }}
+                value={date}
+                onChange={handleDateChange}
+              />
+            </View>
+          </View>
         </View>
         <View
           style={{
@@ -139,6 +180,7 @@ const Home = ({ navigation }) => {
             navigation={navigation}
             searchText={searchText}
             patientData={patientData}
+            selectedDate={selectedDate}
           />
         </View>
       </View>
@@ -157,10 +199,17 @@ const styles = StyleSheet.create({
     padding: 6,
     borderRadius: 10,
     marginBottom: 25,
+    justifyContent: "space-between",
   },
   searchIcon: {
     padding: 10,
     marginLeft: 10,
+  },
+  dateIcon: {
+    width: 32,
+    height: 32,
+    // paddingRight: 10,
+    marginRight: 15,
   },
   input: {
     width: "80%",
