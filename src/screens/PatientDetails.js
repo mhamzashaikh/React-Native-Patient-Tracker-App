@@ -4,13 +4,11 @@ import {
   View,
   Image,
   TextInput,
-  TouchableOpacity,
   ScrollView,
 } from "react-native";
 import React from "react";
 
 const PatientDetails = ({ route }) => {
-  console.log("DATA: ", route.params);
   const {
     cost,
     dateOfArrival,
@@ -22,6 +20,7 @@ const PatientDetails = ({ route }) => {
     patientuid,
     prescription,
   } = route.params;
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -36,7 +35,6 @@ const PatientDetails = ({ route }) => {
         style={styles.subContainer}
       >
         <Text style={styles.headingText}>Patient Information</Text>
-        {/* <Text style={styles.simpleText}>Sign in to continue</Text> */}
         <Image source={require("../../assets/patientimg.png")} />
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Name:</Text>
@@ -93,18 +91,7 @@ const PatientDetails = ({ route }) => {
             editable={false}
           />
         </View>
-        {/* <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Update</Text>
-        </TouchableOpacity> */}
       </ScrollView>
-      {/* <Image
-        style={styles.footer}
-        source={require("../assets/footer-login-screen.png")}
-      /> */}
-      {/* <Text style={styles.bottomText}>
-        Don’t have an account?{" "}
-        <Text onPress={() => navigation.navigate("Signup")}>Signup Now</Text>
-      </Text> */}
     </View>
   );
 };
@@ -118,18 +105,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   headerContainer: {
-    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   subContainer: {
-    // flex: 1,
-    // justifyContent: "start",
-    // alignItems: "center",
     width: "95%",
   },
   scrollContainer: {
-    // justifyContent: "start",
     alignItems: "center",
   },
   topText: {
@@ -171,11 +153,6 @@ const styles = StyleSheet.create({
   input: {
     width: "90%",
     height: 40,
-    // margin: 12,
-    // borderWidth: 1,
-    // borderColor:'#35A2CD',
-    // backgroundColor: "rgb(220,220,220)",
-    // padding: 10,
     borderRadius: 12,
   },
   button: {

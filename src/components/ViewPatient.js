@@ -1,98 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Modal,
-  TouchableOpacity,
-} from "react-native";
-import React, { useEffect, useContext, useState } from "react";
+import { StyleSheet, Text, View, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
 import Item from "./Item";
 import Category from "./Category";
-import {
-  ref,
-  onValue,
-  query,
-  child,
-  orderByChild,
-  equalTo,
-} from "firebase/database";
-import { database } from "../../firebaseConfig";
-import AuthContext from "../../AuthContext";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-const DATA = [
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-  {
-    name: "Mark Wood",
-    age: 20,
-    disease: "Diabetes",
-    date: "19-feb-2021",
-    cost: "150",
-  },
-];
 
 const CATEGORYDATA = [
   {
@@ -126,47 +35,16 @@ const CATEGORYDATA = [
 ];
 
 const ViewPatient = ({ navigation, searchText, patientData, selectedDate }) => {
-  // const [patientData, setPatientData] = useState();
   const [diseaseFilter, setDiseaseFilter] = useState("All");
   const [filteredData, setFilteredData] = useState();
-  const authContext = useContext(AuthContext);
-  console.log("filter data: ", filteredData);
-  console.log("Prop Search text: ", searchText);
 
   useEffect(() => {
-    // // Get a reference to the 'data' node in the database
-    // const dataRef = ref(database, "patients");
-
-    // // Create a query that filters the data based on the doctorID field
-    // const doctorIDQuery = query(
-    //   dataRef,
-    //   orderByChild("doctorID"),
-    //   equalTo(authContext.user)
-    // );
-
-    // onValue(doctorIDQuery, (snapshot) => {
-    //   const data = snapshot.val();
-    //   if (data !== null) {
-    //     const patientArray = Object.keys(data).map((key) => ({
-    //       patientuid: key,
-    //       ...data[key],
-    //     }));
-    //     setPatientData(patientArray);
-    //     setFilteredData(patientArray);
-    //   } else {
-    //     console.log("No Data to show");
-    //   }
-    // },[]);
     if (searchText) {
       const filtered = patientData.filter((item) =>
         item.patientName.toLowerCase().includes(searchText.toLowerCase())
       );
       setFilteredData(filtered);
     } else if (selectedDate) {
-      console.log(
-        "DATE clicked... ",
-        selectedDate.toLocaleString().split(",")[0]
-      );
       const filtered = patientData.filter(
         (item) => item.appointmentDate == selectedDate.toLocaleDateString()
       );
@@ -180,18 +58,8 @@ const ViewPatient = ({ navigation, searchText, patientData, selectedDate }) => {
     }
   }, [patientData, searchText, selectedDate]);
 
-  // if (searchText.length > 0) {
-  //   const filtered = patientData.filter((item) =>
-  //     item.patientName.toLowerCase().includes(searchText.toLowerCase())
-  //   );
-  //   console.log("Filtered: ", filtered.length);
-  //   if (filtered.length != 0) {
-  //     setFilteredData(filtered);
-  //   }
-  // }
-
+  // Filtering Category
   const handleDiseaseSelect = (disease) => {
-    console.log("disease: ", disease);
     setDiseaseFilter(disease);
     if (disease === "All") {
       setFilteredData(patientData);
@@ -233,9 +101,6 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: 50,
     height: "60%",
-    // flex: 1
-    // borderWidth: 2,
-    // borderColor: 'black'
   },
   text: {
     fontWeight: "bold",

@@ -43,9 +43,6 @@ const AddPatient = () => {
 
   // Firebase
   const myFirebase = () => {
-    // const DBRef = push(ref(database, "patients/")).key;
-    // set(DBRef, formData);
-
     // Get a key for every new Patient.
     const newPatientKey = push(child(ref(database), "patients")).key;
 
@@ -65,6 +62,10 @@ const AddPatient = () => {
       ...formData,
       appointmentDate: currentDate.toLocaleDateString(),
     });
+  };
+
+  const showDatePicker = () => {
+    setShow(true);
   };
 
   return (
@@ -93,8 +94,12 @@ const AddPatient = () => {
           </View>
           <View>
             <View style={styles.datePicker}>
-              <Text style={{ opacity: 0.3 }}>Appointment Date: </Text>
-              <DateTimePicker value={date} onChange={handleDateChange} />
+              <Text onPress={showDatePicker} style={{ opacity: 0.3 }}>
+                Appointment Date:{" "}
+              </Text>
+              {show && (
+                <DateTimePicker value={date} onChange={handleDateChange} />
+              )}
             </View>
           </View>
           <View>
@@ -152,13 +157,10 @@ export default AddPatient;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
-    // justifyContent: "center",
     alignItems: "center",
   },
   headerContainer: {
     flex: 1,
-    // justifyContent: "center",
     alignItems: "center",
   },
   scrollContainer: {
@@ -188,8 +190,6 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 40,
     margin: 12,
-    // borderWidth: 1,
-    // borderColor:'#35A2CD',
     backgroundColor: "rgb(220,220,220)",
     padding: 10,
     borderRadius: 12,

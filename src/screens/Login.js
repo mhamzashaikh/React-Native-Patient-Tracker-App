@@ -35,6 +35,7 @@ const Login = ({ navigation }) => {
     }));
   };
 
+  // Signin User
   const signinUser = () => {
     setLoader(true);
     console.log("Sigin btn clicked");
@@ -133,8 +134,6 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 40,
     margin: 12,
-    // borderWidth: 1,
-    // borderColor:'#35A2CD',
     backgroundColor: "rgb(220,220,220)",
     padding: 10,
     borderRadius: 12,

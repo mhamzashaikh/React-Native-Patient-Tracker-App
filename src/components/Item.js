@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import React from "react";
 
 const Item = ({ itemData, navigation }) => {
+  // Converting unixTimeStamp into Human Readable Date.
   const unixTimestamp = itemData.dateOfArrival;
   const dateObject = new Date(unixTimestamp);
   const humanReadableDate = dateObject.toLocaleString();

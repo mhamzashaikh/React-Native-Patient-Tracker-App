@@ -24,8 +24,7 @@ const Profile = ({ navigation }) => {
     });
   }, []);
 
-  console.log("Profile: ", profileData);
-
+  // Signout User
   const signOutUser = () => {
     const auth = getAuth();
     signOut(auth)
@@ -49,7 +48,6 @@ const Profile = ({ navigation }) => {
       </View>
       <View style={styles.subContainer}>
         <Text style={styles.headingText}>My Profile</Text>
-        {/* <Text style={styles.simpleText}>Sign in to continue</Text> */}
         <TextInput
           style={styles.input}
           placeholder="Username"
@@ -76,14 +74,6 @@ const Profile = ({ navigation }) => {
           <Text style={styles.buttonText}>Signout</Text>
         </TouchableOpacity>
       </View>
-      {/* <Image
-        style={styles.footer}
-        source={require("../assets/footer-login-screen.png")}
-      /> */}
-      {/* <Text style={styles.bottomText}>
-        Don’t have an account?{" "}
-        <Text onPress={() => navigation.navigate("Signup")}>Signup Now</Text>
-      </Text> */}
     </View>
   );
 };
@@ -134,8 +124,6 @@ const styles = StyleSheet.create({
     width: "90%",
     height: 40,
     margin: 12,
-    // borderWidth: 1,
-    // borderColor:'#35A2CD',
     backgroundColor: "rgb(220,220,220)",
     padding: 10,
     borderRadius: 12,

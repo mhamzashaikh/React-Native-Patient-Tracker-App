@@ -1,26 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  Button,
-  TextInput,
-  ActivityIndicator,
-} from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import Splash from "./src/screens/Splash";
 import Login from "./src/screens/Login";
 import Signup from "./src/screens/Signup";
 import AuthContext from "./AuthContext";
 import BottomTabNavigation from "./src/BottomTabNavigation";
-// import ProtectedWrapper from "./ProtectedWrapper";
 import PatientDetails from "./src/screens/PatientDetails";
-// import * as SecureStore from "expo-secure-store";
 import { auth } from "./firebaseConfig";
-import { getAuth } from "firebase/auth";
 
 const Stack = createNativeStackNavigator();
 
@@ -30,7 +18,6 @@ export default function App() {
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      // console.log("user: ", user.uid);
       if (user) {
         console.log("User is signed in");
         setUser(user.uid);
@@ -41,9 +28,6 @@ export default function App() {
       }
     });
   }, []);
-  console.log("User state::::: ", user);
-  // const authContext = useContext(AuthContext);
-  // console.log("APP.js Auth: ", authContext);
 
   function signin(newUser, callback) {
     setUser(newUser);
@@ -55,26 +39,6 @@ export default function App() {
   }
 
   let value = { user, signin, signout };
-
-  console.log("Auth: ", auth);
-
-  // auth.onAuthStateChanged((user) => {
-  //   console.log("user: ", user.uid);
-  //   if (user) {
-  //     console.log("User is signed in");
-  //     setUser(user.uid);
-  //   } else {
-  //     console.log("User is not signed in");
-  //   }
-  // });
-  // const gettingAuth = () => {
-  //   const mauth = getAuth();
-  //   // console.log("User auth: ", mauth.currentUser);
-  //   const currentSiginedUser = mauth.currentUser;
-  //   return currentSiginedUser;
-  // };
-
-  // console.log(gettingAuth());
 
   if (loader) {
     return (
@@ -108,28 +72,5 @@ export default function App() {
         </Stack.Navigator>
       </NavigationContainer>
     </AuthContext.Provider>
-
-    // <View style={styles.container}>
-    //   <Text>This is Hamza App</Text>
-    //   <Text>{text}</Text>
-    //   <TextInput
-    //     value={text}
-    //     style={{ width:"80%", height: 40, borderColor: 'gray', borderWidth: 1 }}
-    //   />
-    //   <Button
-    //   title='Click on me'
-    //   onPress={updateCount}
-    //   />
-
-    // </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

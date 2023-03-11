@@ -30,14 +30,8 @@ const Home = ({ navigation }) => {
   const [selectedDate, setSelectedDate] = useState();
   const [show, setShow] = useState(false);
   const { height, width } = useWindowDimensions();
-  const Auth = useContext(AuthContext);
   const authContext = useContext(AuthContext);
-  console.log("AuthContext: >>>>>> : ", authContext);
 
-  // console.log("DATEEEE: ", date.toLocaleString().split(",")[0]);
-  console.log("DATEEEE: ", selectedDate);
-
-  console.log("Searchtext: ", searchText);
   useEffect(() => {
     // Get a reference to the 'data' node in the database
     const dataRef = ref(database, "patients");
@@ -67,11 +61,7 @@ const Home = ({ navigation }) => {
     );
   }, []);
 
-  console.log("useContext: ", Auth);
-
   const handleDateChange = (event, selectedDate) => {
-    console.log("Selected Date: ", selectedDate);
-    // const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(selectedDate);
     setSelectedDate(selectedDate);
@@ -83,13 +73,6 @@ const Home = ({ navigation }) => {
 
   return (
     <Background>
-      {/* <View style={{ justifyContent: 'center', alignItems: 'center', paddingTop: 25 }}>
-                <View style={{ alignItems: 'flex-end', width: '90%' }}>
-                    <Image source={require('../assets/doctorimg.png')}
-                        style={styles.topImage} />
-
-                </View>
-            </View> */}
       <View style={{ alignItems: "center", width: width }}>
         <View
           style={{
@@ -146,10 +129,12 @@ const Home = ({ navigation }) => {
           />
 
           <View>
-            <Image
-              style={styles.dateIcon}
-              source={require("../../assets/date.png")}
-            />
+            <Pressable onPress={showDatePicker}>
+              <Image
+                style={styles.dateIcon}
+                source={require("../../assets/date.png")}
+              />
+            </Pressable>
             <View
               style={{
                 opacity: 0,
@@ -158,11 +143,13 @@ const Home = ({ navigation }) => {
                 top: -5,
               }}
             >
-              <DateTimePicker
-                style={{ height: 50, width: 50 }}
-                value={date}
-                onChange={handleDateChange}
-              />
+              {show && (
+                <DateTimePicker
+                  style={{ height: 50, width: 50 }}
+                  value={date}
+                  onChange={handleDateChange}
+                />
+              )}
             </View>
           </View>
         </View>

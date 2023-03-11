@@ -13,8 +13,6 @@ import { auth, database } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, set } from "firebase/database";
 
-// import { useFonts } from 'expo-font'
-
 const Signup = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
   const [user, setUser] = useState({
@@ -29,6 +27,7 @@ const Signup = ({ navigation }) => {
     const DBRef = ref(database, "user/" + userID);
     set(DBRef, user);
   };
+  // ----
 
   const handleUserNameChange = (username) => {
     setUser((prevUser) => ({
@@ -50,13 +49,12 @@ const Signup = ({ navigation }) => {
     }));
   };
 
+  // Signup User
   const signupUser = () => {
     setLoader(true);
-    console.log("Signup btn clicked");
     createUserWithEmailAndPassword(auth, user.email, user.password)
       .then((userCredential) => {
         myFirebase(userCredential.user.uid);
-        // console.log(userCredential.user.uid)
         console.log("Successfully signup");
         setLoader(false);
       })
@@ -64,10 +62,6 @@ const Signup = ({ navigation }) => {
         console.log(error);
       });
   };
-
-  // const [fontsLoaded] = useFonts({
-  //     'Raleway-Regular': require('../assets/fonts/static/Raleway-Regular.ttf'),
-  //   });
 
   return (
     <View style={styles.container}>
