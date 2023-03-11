@@ -11,13 +11,13 @@ import {
   TextInput,
   ActivityIndicator,
 } from "react-native";
-import Splash from "./src/Splash";
-import Login from "./src/Login";
-import Signup from "./src/Signup";
+import Splash from "./src/screens/Splash";
+import Login from "./src/screens/Login";
+import Signup from "./src/screens/Signup";
 import AuthContext from "./AuthContext";
 import BottomTabNavigation from "./src/BottomTabNavigation";
-import ProtectedWrapper from "./ProtectedWrapper";
-import PatientDetails from "./src/PatientDetails";
+// import ProtectedWrapper from "./ProtectedWrapper";
+import PatientDetails from "./src/screens/PatientDetails";
 // import * as SecureStore from "expo-secure-store";
 import { auth } from "./firebaseConfig";
 import { getAuth } from "firebase/auth";

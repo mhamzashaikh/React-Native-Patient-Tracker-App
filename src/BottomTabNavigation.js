@@ -1,11 +1,9 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Home from "./Home";
-import AddPatient from "./AddPatient";
-import ViewPatient from "./ViewPatient";
-import SearchPatient from "./SearchPatient";
-import Profile from "./Profile";
+import Home from "./screens/Home";
+import AddPatient from "./screens/AddPatient";
+import Profile from "./screens/Profile";
 
 const Tab = createBottomTabNavigator();
 

@@ -8,8 +8,8 @@ import {
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
-import { database } from "../firebaseConfig";
-import AuthContext from "../AuthContext";
+import { database } from "../../firebaseConfig";
+import AuthContext from "../../AuthContext";
 import { getAuth, signOut } from "firebase/auth";
 
 const Profile = ({ navigation }) => {
@@ -43,7 +43,7 @@ const Profile = ({ navigation }) => {
       <View style={styles.headerContainer}>
         <Image
           style={styles.footer}
-          source={require("../assets/header-login-screen.png")}
+          source={require("../../assets/header-login-screen.png")}
         />
         <Text style={styles.topText}>My Profile</Text>
       </View>

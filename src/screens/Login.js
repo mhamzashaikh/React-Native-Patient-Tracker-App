@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import React, { useState, useContext } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebaseConfig";
-import AuthContext from "../AuthContext";
+import { auth } from "../../firebaseConfig";
+import AuthContext from "../../AuthContext";
 const Login = ({ navigation }) => {
   const [loader, setLoader] = useState(false);
   const [user, setUser] = useState({
@@ -59,7 +59,7 @@ const Login = ({ navigation }) => {
     <View style={styles.container}>
       <Image
         style={styles.footer}
-        source={require("../assets/header-login-screen.png")}
+        source={require("../../assets/header-login-screen.png")}
       />
       <Text style={styles.topText}>Sign In</Text>
       <View style={styles.subContainer}>
@@ -83,7 +83,7 @@ const Login = ({ navigation }) => {
       </View>
       <Image
         style={styles.footer}
-        source={require("../assets/footer-login-screen.png")}
+        source={require("../../assets/footer-login-screen.png")}
       />
       <Text style={styles.bottomText}>
         Don’t have an account?{" "}

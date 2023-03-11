@@ -8,7 +8,7 @@ const Item = ({ itemData, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Image source={require("../assets/patientimg.png")} />
+      <Image source={require("../../assets/patientimg.png")} />
       <View style={styles.subContainer}>
         <Text style={styles.name}>{itemData.patientName}</Text>
         <Text style={styles.patientDisease}>{itemData.patientDisease}</Text>
@@ -18,7 +18,7 @@ const Item = ({ itemData, navigation }) => {
       <TouchableOpacity
         onPress={() => navigation.navigate("PatientDetails", itemData)}
       >
-        <Image source={require("../assets/view.png")} />
+        <Image source={require("../../assets/view.png")} />
       </TouchableOpacity>
     </View>
   );

@@ -17,8 +17,8 @@ import {
   orderByChild,
   equalTo,
 } from "firebase/database";
-import { database } from "../firebaseConfig";
-import AuthContext from "../AuthContext";
+import { database } from "../../firebaseConfig";
+import AuthContext from "../../AuthContext";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const DATA = [

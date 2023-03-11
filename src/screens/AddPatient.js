@@ -10,8 +10,8 @@ import {
 } from "react-native";
 import React, { useState, useContext } from "react";
 import RNPickerSelect from "react-native-picker-select";
-import AuthContext from "../AuthContext";
-import { database } from "../firebaseConfig";
+import AuthContext from "../../AuthContext";
+import { database } from "../../firebaseConfig";
 import { ref, push, child, update, serverTimestamp } from "firebase/database";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -72,7 +72,7 @@ const AddPatient = () => {
       <View style={styles.headerContainer}>
         <Image
           style={styles.footer}
-          source={require("../assets/header-login-screen.png")}
+          source={require("../../assets/header-login-screen.png")}
         />
         <Text style={styles.topText}>Add Patient</Text>
       </View>

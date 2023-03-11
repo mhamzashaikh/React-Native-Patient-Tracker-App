@@ -8,10 +8,10 @@ import {
   Platform,
 } from "react-native";
 import React, { useContext, useState, useEffect } from "react";
-import Background from "./Background";
+import Background from "../components/Background";
 import { useWindowDimensions } from "react-native";
-import ViewPatient from "./ViewPatient";
-import AuthContext from "../AuthContext";
+import ViewPatient from "../components/ViewPatient";
+import AuthContext from "../../AuthContext";
 import {
   ref,
   onValue,
@@ -20,7 +20,7 @@ import {
   orderByChild,
   equalTo,
 } from "firebase/database";
-import { database } from "../firebaseConfig";
+import { database } from "../../firebaseConfig";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 const Home = ({ navigation }) => {
@@ -129,7 +129,7 @@ const Home = ({ navigation }) => {
             onPress={() => navigation.navigate("Profile")}
           >
             <Image
-              source={require("../assets/doctorimg.png")}
+              source={require("../../assets/doctorimg.png")}
               style={styles.topImage}
             />
           </Pressable>
@@ -137,7 +137,7 @@ const Home = ({ navigation }) => {
         <View style={styles.searchSection}>
           <Image
             style={styles.searchIcon}
-            source={require("../assets/search-bar.png")}
+            source={require("../../assets/search-bar.png")}
           />
           <TextInput
             style={styles.input}
@@ -148,7 +148,7 @@ const Home = ({ navigation }) => {
           <View>
             <Image
               style={styles.dateIcon}
-              source={require("../assets/date.png")}
+              source={require("../../assets/date.png")}
             />
             <View
               style={{

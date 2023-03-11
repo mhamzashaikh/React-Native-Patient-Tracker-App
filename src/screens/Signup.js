@@ -9,9 +9,8 @@ import {
   ActivityIndicator,
 } from "react-native";
 import React, { useState } from "react";
-import { auth } from "../firebaseConfig";
+import { auth, database } from "../../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { database } from "../firebaseConfig";
 import { ref, set } from "firebase/database";
 
 // import { useFonts } from 'expo-font'
@@ -55,7 +54,7 @@ const Signup = ({ navigation }) => {
     setLoader(true);
     console.log("Signup btn clicked");
     createUserWithEmailAndPassword(auth, user.email, user.password)
-    .then((userCredential) => {
+      .then((userCredential) => {
         myFirebase(userCredential.user.uid);
         // console.log(userCredential.user.uid)
         console.log("Successfully signup");
@@ -74,7 +73,7 @@ const Signup = ({ navigation }) => {
     <View style={styles.container}>
       <Image
         style={styles.footer}
-        source={require("../assets/header-login-screen.png")}
+        source={require("../../assets/header-login-screen.png")}
       />
       <Text style={styles.topText}>Sign Up</Text>
       <View style={styles.subContainer}>
@@ -102,7 +101,7 @@ const Signup = ({ navigation }) => {
       </View>
       <Image
         style={styles.footer}
-        source={require("../assets/footer-login-screen.png")}
+        source={require("../../assets/footer-login-screen.png")}
       />
       <Text style={styles.bottomText}>
         Already have an account?

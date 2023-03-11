@@ -27,7 +27,7 @@ const PatientDetails = ({ route }) => {
       <View style={styles.headerContainer}>
         <Image
           style={styles.footer}
-          source={require("../assets/header-login-screen.png")}
+          source={require("../../assets/header-login-screen.png")}
         />
         <Text style={styles.topText}>Patient Details</Text>
       </View>
@@ -37,7 +37,7 @@ const PatientDetails = ({ route }) => {
       >
         <Text style={styles.headingText}>Patient Information</Text>
         {/* <Text style={styles.simpleText}>Sign in to continue</Text> */}
-        <Image source={require("../assets/patientimg.png")} />
+        <Image source={require("../../assets/patientimg.png")} />
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Name:</Text>
           <TextInput
