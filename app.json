@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "PatientTrackerApp",
-    "slug": "PatientTrackerApp",
+    "slug": "patient-tracker-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,12 +24,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-       
       },
-      "softwareKeyboardLayoutMode" : "pan"
+      "softwareKeyboardLayoutMode": "pan"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d25d45af-fa5e-4673-9502-97466102ad76"
+      }
+    },
+    "owner": "hamzashaikh456"
   }
 }

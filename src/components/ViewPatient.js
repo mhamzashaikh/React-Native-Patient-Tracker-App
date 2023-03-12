@@ -40,15 +40,15 @@ const ViewPatient = ({ navigation, searchText, patientData, selectedDate }) => {
 
   useEffect(() => {
     if (searchText) {
-      const filtered = patientData.filter((item) =>
+      const filtered = patientData?.filter((item) =>
         item.patientName.toLowerCase().includes(searchText.toLowerCase())
       );
       setFilteredData(filtered);
     } else if (selectedDate) {
-      const filtered = patientData.filter(
+      const filtered = patientData?.filter(
         (item) => item.appointmentDate == selectedDate.toLocaleDateString()
       );
-      if (filtered.length != 0) {
+      if (filtered?.length != 0) {
         setFilteredData(filtered);
       } else {
         setFilteredData(patientData);
@@ -65,7 +65,7 @@ const ViewPatient = ({ navigation, searchText, patientData, selectedDate }) => {
       setFilteredData(patientData);
     } else {
       setFilteredData(
-        patientData.filter((item) => item.patientDisease === disease)
+        patientData?.filter((item) => item.patientDisease === disease)
       );
     }
   };

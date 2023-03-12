@@ -25,7 +25,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 
 const Home = ({ navigation }) => {
   const [searchText, setSearchText] = useState("");
-  const [patientData, setPatientData] = useState();
+  const [patientData, setPatientData] = useState([]);
   const [date, setDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState();
   const [show, setShow] = useState(false);
