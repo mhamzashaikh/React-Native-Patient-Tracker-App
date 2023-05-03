@@ -1,3 +1,6 @@
+![App](https://user-images.githubusercontent.com/79870979/235880881-0dad4801-499d-43c1-b2ea-396628b934f1.PNG)
+
+
 # Patient Tracker App
 
 **Patient Tracker App** is a mobile application built on React Native Expo and Firebase RealTime DB to help doctors manage their patients' records more efficiently. The app allows doctors to enter, save, and view patient details, search for patients by name or appointment date, and view patient history when needed.
